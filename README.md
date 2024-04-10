@@ -1,7 +1,7 @@
-<H3>Name: Praveen D</H3>
-<H3>REGISTER NO. 212222240076</H3>
+<H3>NAME:Praveen D</H3>
+<H3>ROLL NO:212222240076</H3>
 <H3>EX. NO.4</H3>
-<H3>DATE: 10-04-2024</H3>
+<H3>DATE:</H3>
 <H1 ALIGN =CENTER>Implementation of MLP with Backpropagation for Multiclassification</H1>
 <H3>Aim:</H3>
 To implement a Multilayer Perceptron for Multi classification
@@ -115,7 +115,7 @@ Normalize our dataset.
 
 <H3>Program:</H3> 
 
-`````
+```
 import pandas as pd
 import sklearn
 from sklearn import preprocessing
@@ -123,22 +123,25 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import classification_report, confusion_matrix
+
 url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
 names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'Class']
 irisdata = pd.read_csv(url, names=names)
+# Takes first 4 columns and assign them to variable "X"
 X = irisdata.iloc[:, 0:4]
+# Takes first 5th columns and assign them to variable "Y". Object dtype refers to strings.
 y = irisdata.select_dtypes(include=[object])
 X.head()
 y.head()
+# y actually contains all categories or classes:
 y.Class.unique()
+# Now transforming categorial into numerical values
 le = preprocessing.LabelEncoder()
 y = y.apply(le.fit_transform)
 y.head()
-y.Class.unique()
-e = preprocessing.LabelEncoder()
-y = y.apply(le.fit_transform)
-y.head()
+# Now for train and test split (80% of  dataset into  training set and  other 20% into test data)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.20)
+# Feature scaling
 scaler = StandardScaler()
 scaler.fit(X_train)
 X_train = scaler.transform(X_train)
@@ -147,9 +150,15 @@ mlp = MLPClassifier(hidden_layer_sizes=(10, 10, 10), max_iter=1000)
 mlp.fit(X_train, y_train.values.ravel())
 predictions = mlp.predict(X_test)
 print(predictions)
+# Last thing: evaluation of algorithm performance in classifying flowers
 print(confusion_matrix(y_test,predictions))
 print(classification_report(y_test,predictions))
+```
 
+## OUTPUT:
+![Screenshot 2024-04-10 153526](https://github.com/AnandhamoorthyKarthikeyan/Ex-4-NN/assets/119475998/e6410d7e-3c1f-45b6-8832-5a989b7bb9a2)
+### PROGRAM
+```
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -173,16 +182,8 @@ m1.fit(training_a, training_b.values.ravel())
 predicted_values = m1.predict(testing_a)
 print(confusion_matrix(testing_b,predicted_values))
 print(classification_report(testing_b,predicted_values))
-`````
-
-<H3>Output:</H3>
-![p1a](https://github.com/thrikesh/Ex-4-NN/assets/119576222/a054f44f-38c1-4a3d-9485-0fc6901ebc0b)
-![p1](https://github.com/thrikesh/Ex-4-NN/assets/119576222/056c1063-1b26-40a2-9e59-98bec20b36b7)
-![p2](https://github.com/thrikesh/Ex-4-NN/assets/119576222/ea1dc63a-1782-46d1-a4a4-45c9f1606757)
-![p3](https://github.com/thrikesh/Ex-4-NN/assets/119576222/dbe8abeb-10ee-44eb-a081-f79a79dc87b1)
-![p3a](https://github.com/thrikesh/Ex-4-NN/assets/119576222/00060aac-2747-4a3b-9563-a4fccf0235bb)
-![p4](https://github.com/thrikesh/Ex-4-NN/assets/119576222/817a70ff-1a3c-49dc-9fcc-1c2af327f85d)
-
-
+```
+### OUTPUT:
+![Screenshot 2024-04-10 153510](https://github.com/AnandhamoorthyKarthikeyan/Ex-4-NN/assets/119475998/6f0b7bac-f7fd-4970-94ec-c84d6c82a8a3)
 <H3>Result:</H3>
 Thus, MLP is implemented for multi-classification using python.
